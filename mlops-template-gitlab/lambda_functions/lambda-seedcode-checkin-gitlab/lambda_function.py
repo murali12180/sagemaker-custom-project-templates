@@ -77,7 +77,7 @@ def lambda_handler(event, context):
     gitlab_project_name_build = os.environ['BuildProjectName'] + '-' + os.environ['SageMakerProjectId']
     gitlab_project_name_deploy = os.environ['DeployProjectName'] + '-' + os.environ['SageMakerProjectId']
 
-    # Fetch GitLab Token Secret
+    # Fetch GitLab Token Secret - Murali test comments
 
     FETCH_GITLAB_TOKEN_SECRET_ERROR_MSG = "GitLab token was not retrieved from Secrets Manager."
 
