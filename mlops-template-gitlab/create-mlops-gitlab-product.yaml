@@ -42,7 +42,9 @@ Parameters:
 
   ProductSupportURLParameter:
     Type: String
-    Default: 'https://github.com/aws-samples/sagemaker-custom-project-templates'
+    # Default: 'https://github.com/aws-samples/sagemaker-custom-project-templates'
+    Default: 'https://github.com/murali12180/sagemaker-custom-project-templates'
+    
     Description: The support url of this product within the portfolio.
 
   SageMakerProjectRepoZipParameter:
