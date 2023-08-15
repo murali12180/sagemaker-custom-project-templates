@@ -90,8 +90,8 @@ Resources:
           SageMakerProjectName: !Sub ${SageMakerProjectName}
           SageMakerProjectId: !Sub ${SageMakerProjectId}
           GitLabTokenSecretName: AWSDEFAULT___GITLAB_TOKEN_SECRET_NAME___
-          IAMAccessKeySecretName: AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___
-          IAMSecretKeySecretName: AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___
+          # IAMAccessKeySecretName: AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___
+          # IAMSecretKeySecretName: AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___
           SeedCodeBucket: AWSDEFAULT___CODE_STAGING_BUCKET___
           ModelBuildSeedCode: AWSDEFAULT___PROJECT_NAME___/seedcode/mlops-gitlab-project-seedcode-model-build.zip
           ModelDeploySeedCode: AWSDEFAULT___PROJECT_NAME___/seedcode/mlops-gitlab-project-seedcode-model-deploy.zip
