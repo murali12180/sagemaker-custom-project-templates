@@ -136,93 +136,93 @@ Resources:
         SecretString: 
           ENTER_GITLAB_TOKEN_HERE
 
-  GitLabIAMUser:
-    Type: AWS::IAM::User
-    Properties: 
-      UserName: !Join ['-',['SM-Projects-GitLab-User', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#  GitLabIAMUser:
+#    Type: AWS::IAM::User
+#    Properties:
+#      UserName: !Join ['-',['SM-Projects-GitLab-User', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
 
-  GitLabIAMUserPolicy:
-    Type: AWS::IAM::Policy
-    Properties: 
-      PolicyName: !Join ['-',['SM-Projects-GitLab-User-Policy', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
-      Users:
-       - !Ref GitLabIAMUser
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Action:
-              - 'cloudformation:CreateChangeSet'
-              - 'cloudformation:CreateStack'
-              - 'cloudformation:DescribeChangeSet'
-              - 'cloudformation:DeleteChangeSet'
-              - 'cloudformation:DeleteStack'
-              - 'cloudformation:DescribeStacks'
-              - 'cloudformation:ExecuteChangeSet'
-              - 'cloudformation:SetStackPolicy'
-              - 'cloudformation:UpdateStack'
-            Resource: 
-              - 'arn:aws:cloudformation:*:*:stack/gitlab-stg-*'
-              - 'arn:aws:cloudformation:*:*:stack/gitlab-prd-*'
-            Effect: Allow
-          - Effect: Allow
-            Action:
-              - 'sagemaker:*'
-            NotResource:
-              - 'arn:aws:sagemaker:*:*:domain/*'
-              - 'arn:aws:sagemaker:*:*:user-profile/*'
-              - 'arn:aws:sagemaker:*:*:app/*'
-              - 'arn:aws:sagemaker:*:*:flow-definition/*'
-          - Effect: Allow
-            Action:
-              - 's3:CreateBucket'
-              - 's3:DeleteBucket'
-              - 's3:GetBucketAcl'
-              - 's3:GetBucketCors'
-              - 's3:GetBucketLocation'
-              - 's3:ListAllMyBuckets'
-              - 's3:ListBucket'
-              - 's3:ListBucketMultipartUploads'
-              - 's3:PutBucketCors'
-            Resource:
-              - 'arn:aws:s3:::sagemaker-*'
-          - Effect: Allow
-            Action:
-              - 's3:AbortMultipartUpload'
-              - 's3:DeleteObject'
-              - 's3:GetObject'
-              - 's3:GetObjectVersion'
-              - 's3:PutObject'
-            Resource:
-              - 'arn:aws:s3:::sagemaker-*'
-          - Effect: Allow
-            Action:
-              - 'iam:PassRole'
-            Resource:
-              - !GetAtt ServiceCatalogProductUseRole.Arn
+#  GitLabIAMUserPolicy:
+#    Type: AWS::IAM::Policy
+#    Properties:
+#      PolicyName: !Join ['-',['SM-Projects-GitLab-User-Policy', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#      Users:
+#       - !Ref GitLabIAMUser
+#      PolicyDocument:
+#        Version: 2012-10-17
+#        Statement:
+#          - Action:
+#              - 'cloudformation:CreateChangeSet'
+#              - 'cloudformation:CreateStack'
+#              - 'cloudformation:DescribeChangeSet'
+#              - 'cloudformation:DeleteChangeSet'
+#              - 'cloudformation:DeleteStack'
+#              - 'cloudformation:DescribeStacks'
+#              - 'cloudformation:ExecuteChangeSet'
+#              - 'cloudformation:SetStackPolicy'
+#              - 'cloudformation:UpdateStack'
+#            Resource:
+#              - 'arn:aws:cloudformation:*:*:stack/gitlab-stg-*'
+#              - 'arn:aws:cloudformation:*:*:stack/gitlab-prd-*'
+#            Effect: Allow
+#          - Effect: Allow
+#            Action:
+#              - 'sagemaker:*'
+#            NotResource:
+#              - 'arn:aws:sagemaker:*:*:domain/*'
+#              - 'arn:aws:sagemaker:*:*:user-profile/*'
+#              - 'arn:aws:sagemaker:*:*:app/*'
+#              - 'arn:aws:sagemaker:*:*:flow-definition/*'
+#          - Effect: Allow
+#            Action:
+#              - 's3:CreateBucket'
+#              - 's3:DeleteBucket'
+#              - 's3:GetBucketAcl'
+#              - 's3:GetBucketCors'
+#              - 's3:GetBucketLocation'
+#              - 's3:ListAllMyBuckets'
+#              - 's3:ListBucket'
+#              - 's3:ListBucketMultipartUploads'
+#              - 's3:PutBucketCors'
+#            Resource:
+#              - 'arn:aws:s3:::sagemaker-*'
+#          - Effect: Allow
+#            Action:
+#              - 's3:AbortMultipartUpload'
+#              - 's3:DeleteObject'
+#              - 's3:GetObject'
+#              - 's3:GetObjectVersion'
+#              - 's3:PutObject'
+#            Resource:
+#              - 'arn:aws:s3:::sagemaker-*'
+#          - Effect: Allow
+#            Action:
+#              - 'iam:PassRole'
+#            Resource:
+#              - !GetAtt ServiceCatalogProductUseRole.Arn
 
-  GitLabIAMUserAccessKey:
-    Type: AWS::IAM::AccessKey
-    Properties: 
-      Status: Active
-      UserName: !Ref GitLabIAMUser
+#  GitLabIAMUserAccessKey:
+#    Type: AWS::IAM::AccessKey
+#    Properties:
+#      Status: Active
+#      UserName: !Ref GitLabIAMUser
 
-  GitLabIAMUserAccessKeySecret:
-    Type: AWS::SecretsManager::Secret
-    Properties: 
-      Description: String
-      Name: !Join ['-',['SageMaker-Projects-GitLab-UserAccessKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
-      SecretString: !Ref GitLabIAMUserAccessKey
+#  GitLabIAMUserAccessKeySecret:
+#    Type: AWS::SecretsManager::Secret
+#    Properties:
+#      Description: String
+#      Name: !Join ['-',['SageMaker-Projects-GitLab-UserAccessKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#      SecretString: !Ref GitLabIAMUserAccessKey
 
-  GitLabIAMUserSecretKeySecret:
-    Type: AWS::SecretsManager::Secret
-    Properties: 
-      Description: String
-      Name: !Join ['-',['SageMaker-Projects-GitLab-UserSecretKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
-      SecretString: !GetAtt GitLabIAMUserAccessKey.SecretAccessKey
+#  GitLabIAMUserSecretKeySecret:
+#    Type: AWS::SecretsManager::Secret
+#    Properties:
+#      Description: String
+#      Name: !Join ['-',['SageMaker-Projects-GitLab-UserSecretKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#      SecretString: !GetAtt GitLabIAMUserAccessKey.SecretAccessKey
 
   BootstrapS3Bucket:
     Type: AWS::S3::Bucket
-    Properties: 
+    Properties:
       BucketName: !Join ['-',['sm-project-mlopsgitlab-example', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
@@ -233,16 +233,16 @@ Resources:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
               SSEAlgorithm: 'AES256'
-  
+
   BootstrapS3BucketPolicy:
     Type: AWS::S3::BucketPolicy
-    Properties: 
+    Properties:
       Bucket: !Ref BootstrapS3Bucket
       PolicyDocument:
           Version: "2012-10-17"
           Statement:
             - Effect: Allow
-              Principal: 
+              Principal:
                 AWS:
                   - !GetAtt ServiceCatalogProductLaunchRole.Arn
               Action: 's3:GetObject'
@@ -250,7 +250,7 @@ Resources:
 
   BootstrapLambdaExecutionRole:
     Type: AWS::IAM::Role
-    Properties: 
+    Properties:
       RoleName: !Join ['-', ['SMCustomProject-MLOpsGitLab-Bootstrap-Role', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
       Description: Role used for launching the lambda function to bootstrap creation of the MLOps GitLab SageMaker Custom Project Template example
       AssumeRolePolicyDocument:
@@ -269,14 +269,14 @@ Resources:
               Version: "2012-10-17"
               Statement:
                 - Effect: Allow
-                  Action: 
+                  Action:
                     - 's3:PutObject'
                     - 's3:GetObject'
                   Resource: !Join ['',[!GetAtt BootstrapS3Bucket.Arn,'/*']]
 
   ServiceCatalogProduct:
     Type: AWS::ServiceCatalog::CloudFormationProduct
-    Properties: 
+    Properties:
       Description: !Ref ProductDescriptionParameter
       Distributor: !Ref ProductDistributorParameter
       Name: !Ref ProductNameParameter
@@ -299,13 +299,13 @@ Resources:
 
   ServiceCatalogProductAssociation:
     Type: AWS::ServiceCatalog::PortfolioProductAssociation
-    Properties: 
+    Properties:
       PortfolioId: !Ref PortfolioIDParameter
       ProductId: !Ref ServiceCatalogProduct
 
   ServiceCatalogProductLaunchRole:
     Type: AWS::IAM::Role
-    Properties: 
+    Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -315,15 +315,15 @@ Resources:
                 - servicecatalog.amazonaws.com
             Action: 'sts:AssumeRole'
       Description: Role to use for launching the GitLab SageMaker Project example.
-      ManagedPolicyArns: 
+      ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonSageMakerAdmin-ServiceCatalogProductsServiceRolePolicy
-      Policies: 
+      Policies:
         - PolicyName: SM-Gitlab-Example-Launch-Policy
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
-                Action: 
+                Action:
                   - 's3:PutObject'
                   - 's3:GetObject'
                 Resource: !Join ['',[!GetAtt BootstrapS3Bucket.Arn,'/*']]
@@ -340,7 +340,7 @@ Resources:
 
   ServiceCatalogProductUseRole:
     Type: AWS::IAM::Role
-    Properties: 
+    Properties:
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -359,17 +359,17 @@ Resources:
                 - codebuild.amazonaws.com
             Action: 'sts:AssumeRole'
       Description: Role to use for launching the GitLab SageMaker Project example.
-      Policies: 
+      Policies:
         - PolicyName: SM-Gitlab-Example-Use-Policy
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
-                Action: 
+                Action:
                   - 's3:GetObject'
                 Resource: !Join ['',[!GetAtt BootstrapS3Bucket.Arn,'/*']]
               - Effect: Allow
-                Action: 
+                Action:
                   - 'secretsmanager:GetSecretValue'
                 Resource: !Ref GitLabTokenSecret
               - Action:
@@ -382,7 +382,7 @@ Resources:
                   - 'cloudformation:ExecuteChangeSet'
                   - 'cloudformation:SetStackPolicy'
                   - 'cloudformation:UpdateStack'
-                Resource: 
+                Resource:
                   - 'arn:aws:cloudformation:*:*:stack/gitlab-stg-*'
                   - 'arn:aws:cloudformation:*:*:stack/gitlab-prd-*'
                 Effect: Allow
@@ -474,19 +474,19 @@ Resources:
                   - 'arn:aws:sagemaker:*:*:user-profile/*'
                   - 'arn:aws:sagemaker:*:*:app/*'
                   - 'arn:aws:sagemaker:*:*:flow-definition/*'
-              - Effect: Allow
-                Action:
-                  - 'secretsmanager:GetSecretValue'
-                Resource:
-                  - !Ref GitLabIAMUserSecretKeySecret
-                  - !Ref GitLabIAMUserAccessKeySecret
+#              - Effect: Allow
+#                Action:
+#                  - 'secretsmanager:GetSecretValue'
+#                Resource:
+#                  - !Ref GitLabIAMUserSecretKeySecret
+#                  - !Ref GitLabIAMUserAccessKeySecret
       RoleName: !Join ['-', ['SM-Gitlab-Example-Use-Role', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
 
   ServiceCatalogProductRoleLaunchContstraint:
     Type: AWS::ServiceCatalog::LaunchRoleConstraint
-    DependsOn: 
+    DependsOn:
       - ServiceCatalogProductAssociation
-    Properties: 
+    Properties:
       Description: Role for launching the mlops GitLab endpoint product
       PortfolioId: !Ref PortfolioIDParameter
       ProductId: !Ref ServiceCatalogProduct
@@ -661,8 +661,8 @@ Resources:
         AWSDEFAULT___CODE_STAGING_BUCKET___: !Ref BootstrapS3Bucket
         AWSDEFAULT___PROJECT_NAME___: !Ref SageMakerProjectsProjectNameParameter
         AWSDEFAULT___GITLAB_TOKEN_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-Token', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
-        AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserAccessKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
-        AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserSecretKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#        AWSDEFAULT___IAM_ACCESS_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserAccessKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
+#        AWSDEFAULT___IAM_SECRET_KEY_SECRET_NAME___: !Join ['-',['SageMaker-Projects-GitLab-UserSecretKey', !Select [4, !Split ['-', !Select [2, !Split ['/', !Ref 'AWS::StackId']]]]]]
         AWSDEFAULT___USE_ROLE___: !GetAtt ServiceCatalogProductUseRole.Arn
       Archives:
         - ['mlops-gitlab-project-seedcode-model-deploy.zip', '/seedcode/mlops-gitlab-project-seedcode-model-deploy']
@@ -695,7 +695,7 @@ Outputs:
     Value: !Join [ ':', [ 'arn', !Ref 'AWS::Partition', 'iam:', !Ref 'AWS::AccountId', 'role/service-role/AmazonSageMakerServiceCatalogProductsLaunchRole'] ]
     Export:
       Name: !Join [':', [!Ref 'AWS::StackName', 'ServiceCatalogProductLaunchRoleARN'] ]
-  
+
   CodeStagingBucketName:
     Description: Name of the S3 Bucket containing the staging code for the repository.
     Value: !Ref BootstrapS3Bucket
@@ -707,15 +707,15 @@ Outputs:
     Value: !Ref GitLabTokenSecret
     Export:
       Name: !Join [':', [!Ref 'AWS::StackName', 'GitLabTokenSecretARN'] ]
-  
-  GitLabIAMUserAccessKeySecretARN:
-    Description: ARN of Secrets Manager Secret for the GitLab IAM User Access Key.
-    Value: !Ref GitLabIAMUserAccessKeySecret
-    Export:
-      Name: !Join [':', [!Ref 'AWS::StackName', 'GitLabIAMUserAccessKeySecretARN'] ]
-  
-  GitLabIAMUserSecretKeySecretARN:
-    Description: ARN of Secrets Manager Secret for the GitLab IAM User Secret Key.
-    Value: !Ref GitLabIAMUserSecretKeySecret
-    Export:
-      Name: !Join [':', [!Ref 'AWS::StackName', 'GitLabIAMUserSecretKeySecretARN'] ]
+
+#  GitLabIAMUserAccessKeySecretARN:
+#    Description: ARN of Secrets Manager Secret for the GitLab IAM User Access Key.
+#    Value: !Ref GitLabIAMUserAccessKeySecret
+#    Export:
+#      Name: !Join [':', [!Ref 'AWS::StackName', 'GitLabIAMUserAccessKeySecretARN'] ]
+
+#  GitLabIAMUserSecretKeySecretARN:
+#    Description: ARN of Secrets Manager Secret for the GitLab IAM User Secret Key.
+#    Value: !Ref GitLabIAMUserSecretKeySecret
+#    Export:
+#      Name: !Join [':', [!Ref 'AWS::StackName', 'GitLabIAMUserSecretKeySecretARN'] ]
